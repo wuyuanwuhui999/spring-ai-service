@@ -1,4 +1,4 @@
-package com.ai.controller;
+package com.player.ai.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
