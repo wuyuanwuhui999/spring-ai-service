@@ -1,6 +1,16 @@
 server:
   port: 8888
 
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+  info:
+    title: "AI搜索"
+    description: "AI智能搜索"
+    version: "1.0"
+
 spring:
   application:
     name: spring-ai-app

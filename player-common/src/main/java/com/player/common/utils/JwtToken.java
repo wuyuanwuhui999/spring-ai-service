@@ -1,12 +1,12 @@
 package com.player.common.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import io.jsonwebtoken.*;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 import java.util.Date;
 import com.player.common.entity.UserEntity;
+import io.jsonwebtoken.*;
 
 /**
  * @author zengjintao

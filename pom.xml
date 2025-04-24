@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.3</version>
+        <version>3.4.4</version>
         <relativePath/>
     </parent>
     <artifactId>player</artifactId>
@@ -18,10 +18,17 @@
         <module>./player-common</module>
     </modules>
     <properties>
+        <org.springframework.boot.version>3.4.4</org.springframework.boot.version>
         <java.version>17</java.version>
         <spring-ai.version>1.0.0-M6</spring-ai.version>
         <mysql-connector-java.version>8.0.24</mysql-connector-java.version>
         <lombok.version>1.18.22</lombok.version>
+        <swagger-annotations.version>1.5.20</swagger-annotations.version>
+        <spring-data-redis.version>3.4.4</spring-data-redis.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.5.0</springdoc-openapi-starter-webmvc-ui.version>
+        <fastjson.version>2.0.36</fastjson.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <httpclient5.version>5.2.1</httpclient5.version>
     </properties>
     <packaging>pom</packaging>
     <dependencies>
@@ -50,12 +57,37 @@
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>1.5.20</version>
+            <version>${swagger-annotations.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.20</version>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${spring-data-redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${org.springframework.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>${httpclient5.version}</version>
         </dependency>
     </dependencies>
 
