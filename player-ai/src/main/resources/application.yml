@@ -11,7 +11,23 @@ springdoc:
     description: "AI智能搜索"
     version: "1.0"
 
+mybatis-plus:
+  type-aliases-package: com.player.ai.entity  # 实体类包路径
+  mapper-locations: classpath*:/mapper/**/*.xml  # XML 文件路径
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印 SQL 日志
+    map-underscore-to-camel-case: true  # 开启驼峰映射
+  global-config:
+    db-config:
+      id-type: assign_id  # 主键生成策略（雪花算法）
+
+
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB # 单个文件最大大小
+      max-request-size: 50MB # 请求的最大大小
+      upload-dir: G:/static/ai/
   application:
     name: spring-ai-app
   ai:
@@ -25,26 +41,11 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    druid:
-      url: jdbc:mysql://127.0.0.1:3306/play?characterEncoding=utf-8
-      username: root
-      password: ${MYSQL_PASSWORD}
-      driverClassName: com.mysql.jdbc.Driver
-      initialSize: 5  #初始建立连接数量
-      minIdle: 5  #最小连接数量
-      maxActive: 20 #最大连接数量
-      maxWait: 10000  #获取连接最大等待时间，毫秒
-      testOnBorrow: true #申请连接时检测连接是否有效
-      testOnReturn: false #归还连接时检测连接是否有效
-      timeBetweenEvictionRunsMillis: 60000 #配置间隔检测连接是否有效的时间（单位是毫秒）
-      minEvictableIdleTimeMillis: 300000  #连接在连接池的最小生存时间（毫秒）
+    url: jdbc:mysql://127.0.0.1:3306/play?characterEncoding=utf-8
+    username: root
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.player.music.entity
-  configuration:
-    map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   level:
     org.springframework.ai.chat.client.advisor: debug

@@ -29,6 +29,7 @@
         <fastjson.version>2.0.36</fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
         <httpclient5.version>5.2.1</httpclient5.version>
+        <mybatis-plus-boot-starter.version>3.5.7</mybatis-plus-boot-starter.version>
     </properties>
     <packaging>pom</packaging>
     <dependencies>
@@ -88,6 +89,11 @@
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
             <version>${httpclient5.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
     </dependencies>
 
