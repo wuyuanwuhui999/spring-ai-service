@@ -1,7 +1,3 @@
-git remote rm origin
-git remote add origin https://gitee.com/wuyuanwuhui99/spring-ai-service
+git remote set-url origin https://github.com/wuyuanwuhui999/spring-ai-service
 git push origin main
-pause
-
-git remote remove origin
-git remote add origin git@https://gitee.com/wuyuanwuhui99/spring-ai-service
+pause   

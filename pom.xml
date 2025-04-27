@@ -29,7 +29,8 @@
         <fastjson.version>2.0.36</fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
         <httpclient5.version>5.2.1</httpclient5.version>
-        <mybatis-plus-boot-starter.version>3.5.7</mybatis-plus-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.11</mybatis-plus-boot-starter.version>
+        <player-common.version>0.0.1-SNAPSHOT</player-common.version>
     </properties>
     <packaging>pom</packaging>
     <dependencies>
@@ -94,6 +95,12 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.player.common</groupId>
+            <artifactId>player-common</artifactId>
+            <version>${player-common.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -1,14 +1,12 @@
 package com.player.ai.service.imp;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.player.ai.entity.ChatEntity;
 import com.player.ai.mapper.AiMapper;
 import com.player.ai.service.IAiService;
-import com.player.common.entity.ResultEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor;
 import org.springframework.ai.model.Media;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeType;
@@ -30,15 +28,12 @@ import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvis
 
 @RequiredArgsConstructor
 @Service
-public class AiService implements IAiService {
+public class AiService extends ServiceImpl<AiMapper,ChatEntity> implements IAiService {
 
     private  final ChatClient chatClient;
 
     @Value("${spring.servlet.multipart.upload-dir}")
     private String UPLOAD_DIR;
-
-    @Autowired
-    private AiMapper aiMapper;
 
     @Override
     public Flux<String> chat(String userId, String prompt, String chatId, List<MultipartFile> files) {
@@ -81,7 +76,7 @@ public class AiService implements IAiService {
         // 订阅并保存到数据库
         contentMono.subscribe(content -> {
             chatEntity.setContent(content); // 设置内容
-            aiMapper.insert(chatEntity); // 插入到数据库
+            save(chatEntity);
         });
 
         return stringFlux;
