@@ -12,12 +12,16 @@
     <groupId>com.player</groupId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-ai-app</name>
+    <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
     <modules>
-        <module>./player-ai</module>
-        <module>./player-common</module>
+        <module>player-ai</module>
+        <module>player-common</module>
     </modules>
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework.boot.version>3.4.4</org.springframework.boot.version>
         <java.version>17</java.version>
         <spring-ai.version>1.0.0-M6</spring-ai.version>
@@ -29,10 +33,9 @@
         <fastjson.version>2.0.36</fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
         <httpclient5.version>5.2.1</httpclient5.version>
-        <mybatis-plus-boot-starter.version>3.5.11</mybatis-plus-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.3.1</mybatis-plus-boot-starter.version>
         <player-common.version>0.0.1-SNAPSHOT</player-common.version>
     </properties>
-    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.ai</groupId>
@@ -96,12 +99,6 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.player.common</groupId>
-            <artifactId>player-common</artifactId>
-            <version>${player-common.version}</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -109,6 +106,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.4.4</version>
                 <configuration>
                     <excludes>
                         <exclude>
@@ -117,6 +115,16 @@
                         </exclude>
                     </excludes>
                 </configuration>
+                <executions>
+                    <!-- 排除公共模块 -->
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <phase>none</phase> <!-- 取消默认的打包阶段 -->
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

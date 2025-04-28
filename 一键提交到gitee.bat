@@ -1,3 +1,3 @@
-git remote set-url origin https://github.com/wuyuanwuhui999/spring-ai-service
-git push origin main
+git remote set-url origin https://gitee.com/wuyuanwuhui99/spring-ai-service
+git push
 pause   
