@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.http.client.HttpClientAutoConfigur
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.client.RestClientAutoConfiguration;
 
-@MapperScan("com.ai.mapper") // 扫描 Mapper 接口
-@SpringBootApplication(scanBasePackages = {"com.ai", "org.springframework.ai.chat.client"},exclude = { HttpClientAutoConfiguration.class, RestClientAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages = {"com.ai", "org.springframework.ai.chat.client"},exclude = { DataSourceAutoConfiguration.class,HttpClientAutoConfiguration.class, RestClientAutoConfiguration.class})
 public class AiApplication {
     public static void main(String[] args) {
         SpringApplication.run(AiApplication.class, args);

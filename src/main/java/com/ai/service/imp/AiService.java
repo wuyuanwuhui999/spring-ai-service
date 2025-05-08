@@ -1,20 +1,14 @@
 package com.ai.service.imp;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ai.entity.ChatEntity;
-import com.ai.mapper.AiMapper;
 import com.ai.service.IAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.model.Media;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeType;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,13 +23,12 @@ import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvis
 
 @RequiredArgsConstructor
 @Service
-public class AiService extends ServiceImpl<AiMapper,ChatEntity> implements IAiService {
+public class AiService implements IAiService {
 
     @Autowired
     private ChatClient chatClient;
 
-    @Value("${spring.servlet.multipart.upload-dir}")
-    private String UPLOAD_DIR;
+    private String UPLOAD_DIR = "G:/static/ai/";
 
     @Override
     public Flux<String> chat(String prompt, String chatId, List<MultipartFile> files) {

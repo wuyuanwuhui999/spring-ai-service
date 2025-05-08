@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 
 import java.util.List;
 
-public interface IAiService extends IService<ChatEntity> {
+public interface IAiService {
     Flux<String> chat(String prompt, String chatId, List<MultipartFile> files);
 
     String upload(List<MultipartFile>files);
