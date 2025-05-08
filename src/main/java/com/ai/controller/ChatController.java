@@ -1,8 +1,6 @@
-package com.player.ai.controller;
+package com.ai.controller;
 
-import com.player.ai.service.IAiService;
-import com.player.common.entity.UserEntity;
-import com.player.common.utils.JwtToken;
+import com.ai.service.IAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,22 +18,15 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/ai",produces = "text/html;charset=utf-8")
 public class ChatController {
-    private  final ChatClient chatClient;
-
-    @Value("${token.secret}")
-    private String secret;
-
     @Autowired
     private IAiService aiService;
 
     @RequestMapping("/chat")
     public Flux<String> chat(
-            @RequestHeader("Authorization") String token,
             @RequestParam("prompt") String prompt,
             @RequestParam("chatId") String chatId,
             @RequestParam(value = "files", required = false) List<MultipartFile> files
     ){
-        String userId = JwtToken.parserToken(token, UserEntity.class, secret).getId();
-        return aiService.chat(userId, prompt, chatId, files);
+        return aiService.chat(prompt, chatId, files);
     }
 }

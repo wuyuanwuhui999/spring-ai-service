@@ -1,4 +1,4 @@
-package com.player.ai.entity;
+package com.ai.entity;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;

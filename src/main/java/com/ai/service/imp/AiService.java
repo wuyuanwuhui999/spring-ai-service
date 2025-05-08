@@ -1,12 +1,13 @@
-package com.player.ai.service.imp;
+package com.ai.service.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.player.ai.entity.ChatEntity;
-import com.player.ai.mapper.AiMapper;
-import com.player.ai.service.IAiService;
+import com.ai.entity.ChatEntity;
+import com.ai.mapper.AiMapper;
+import com.ai.service.IAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.model.Media;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeType;
@@ -30,18 +31,15 @@ import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvis
 @Service
 public class AiService extends ServiceImpl<AiMapper,ChatEntity> implements IAiService {
 
-    private  final ChatClient chatClient;
+    @Autowired
+    private ChatClient chatClient;
 
     @Value("${spring.servlet.multipart.upload-dir}")
     private String UPLOAD_DIR;
 
     @Override
-    public Flux<String> chat(String userId, String prompt, String chatId, List<MultipartFile> files) {
+    public Flux<String> chat(String prompt, String chatId, List<MultipartFile> files) {
         Flux<String> stringFlux;
-        ChatEntity chatEntity = new ChatEntity();
-        chatEntity.setChatId(chatId);
-        chatEntity.setUserId(userId);
-        chatEntity.setPrompt(prompt);
         if (files == null || files.isEmpty()) {
             // 没有附件，纯文本聊天
             stringFlux = chatClient
@@ -54,7 +52,6 @@ public class AiService extends ServiceImpl<AiMapper,ChatEntity> implements IAiSe
             // 有附件，多模态聊天
             // 1.解析多媒体
             String uploadFiles = upload(files);
-            chatEntity.setFiles(uploadFiles);
             List<Media> medias = files.stream()
                     .map(file -> new Media(
                                     MimeType.valueOf(Objects.requireNonNull(file.getContentType())),
@@ -69,15 +66,6 @@ public class AiService extends ServiceImpl<AiMapper,ChatEntity> implements IAiSe
                     .stream()
                     .content();
         }
-        // 将 Flux<String> 转换为 Mono<String>
-        Mono<String> contentMono = stringFlux.collectList()
-                .map(list -> String.join("", list)); // 拼接字符串
-
-        // 订阅并保存到数据库
-        contentMono.subscribe(content -> {
-            chatEntity.setContent(content); // 设置内容
-            save(chatEntity);
-        });
 
         return stringFlux;
     }

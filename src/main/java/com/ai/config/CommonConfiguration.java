@@ -1,4 +1,4 @@
-package com.player.ai.config;
+package com.ai.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
